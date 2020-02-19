@@ -49,6 +49,7 @@ public class BitmapHacker{
 		int colorDepth = reader.read() + reader.read()*256; //reading a single word in little endian.
 		if(colorDepth != BYTES_PER_PIXEL * 8){
 			String err = String.format("Attempted to read bitmap with %d-bit color depth.  Can only read bitmap of %d-bit color depth.", colorDepth, BYTES_PER_PIXEL * 8);
+			reader.close();
 			throw new IllegalArgumentException(err);
 		}
 
@@ -324,6 +325,7 @@ public class BitmapHacker{
 					iPix++;
 					pi = pixels[iPix / width][iPix % width];
 				}
+				reader.close();
 				cur2Bits++;
 			}
 
