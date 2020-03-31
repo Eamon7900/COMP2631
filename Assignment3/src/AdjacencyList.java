@@ -1,7 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AdjacencyList {
+public class AdjacencyList{
     private int numNodes = 0;
     private ArrayList<ArrayList<Integer>> adjList;
 
@@ -16,7 +16,6 @@ public class AdjacencyList {
         for(int[] edge : edges){
             adjList.get(edge[0]).add(edge[1]);
         }
-        printAdjList(); //DEBUG
     }
 
     private void printAdjList(){
@@ -24,9 +23,6 @@ public class AdjacencyList {
         for(ArrayList<Integer> node : adjList){
             if(node == null) continue;
             System.out.printf("%d: ", i++);
-            for(int outNode : node){
-                System.out.printf("%d ", outNode);
-            }
             System.out.println();
         }
     }
@@ -36,6 +32,8 @@ public class AdjacencyList {
     }
 
     public ArrayList<Integer> getOutNeighbors(int node){
-        return (ArrayList<Integer>) (adjList.get(node).clone());
+        if(node <= 0 || node > numNodes)
+            throw new IllegalArgumentException("Attempted to get out neighbors of node that does not exist");
+        return adjList.get(node);
     }
 }
